@@ -1,0 +1,9 @@
+<div>
+  <app-do-check-item *ngFor="let task of tasks"
+      [item]="task"
+      (remove)="onRemove($event)"
+      (setPriority)="onSetPriority($event)"
+      (completeAction)="onCompleteAction($event)"
+      (clearAction)="onClearAction($event)">
+  </app-do-check-item>
+</div>

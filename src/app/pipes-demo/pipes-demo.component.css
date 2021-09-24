@@ -1,0 +1,10 @@
+::ng-deep summary {
+  cursor: pointer ;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+::ng-deep details {
+  padding: 15px;
+}
+

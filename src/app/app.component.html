@@ -1,0 +1,32 @@
+<form [formGroup]="demoExamplesGroup">
+  <label>
+    <input
+      name="componentsDemo"
+      type="checkbox"
+      formControlName="componentsDemo"
+    />
+    Show components demo
+  </label>
+  <br />
+  <label>
+    <input name="pipesDemo" type="checkbox" formControlName="pipesDemo" />
+    Show pipes demo
+  </label>
+  <br />
+  <label>
+    <input name="servicesDemo" type="checkbox" formControlName="servicesDemo" />
+    Show services demo
+  </label>
+
+  <app-components-demo
+    *ngIf="demoExamplesGroup.get('componentsDemo').value"
+  ></app-components-demo>
+  <hr />
+  <app-pipes-demo
+    *ngIf="demoExamplesGroup.get('pipesDemo').value"
+  ></app-pipes-demo>
+  <hr />
+  <app-services-demo
+    *ngIf="demoExamplesGroup.get('servicesDemo').value"
+  ></app-services-demo>
+</form>
