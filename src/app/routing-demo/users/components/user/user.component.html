@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Last edited:
+    <span class="user__edited-time">{{ user.lastEdited | date: "short" }}</span>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <li>FirstName: {{ user.firstName }}</li>
+      <li>LastName: {{ user.lastName }}</li>
+    </ul>
+    <button class="btn btn-warning btn-sm" (click)="onEditUser()">
+      Edit
+    </button>
+  </div>
+</div>

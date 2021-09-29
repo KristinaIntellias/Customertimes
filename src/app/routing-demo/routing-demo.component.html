@@ -1,0 +1,27 @@
+<app-navigation-menu></app-navigation-menu>
+
+<!-- <app-spinner *ngIf="spinner.isVisible()"></app-spinner> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-md-10">
+      <router-outlet
+        #routerOutlet="outlet"
+        (activate)="onActivate($event, routerOutlet)"
+        (deactivate)="onDeactivate($event, routerOutlet)"
+      ></router-outlet>
+    </div>
+
+    <div class="col-xs-4 col-md-2">
+      <button
+        class="btn btn-success"
+        *ngIf="!messagesService.isDisplayed"
+        (click)="onDisplayMessages()"
+      >
+        Show Messages
+      </button>
+
+      <router-outlet name="messages"></router-outlet>
+    </div>
+  </div>
+</div>

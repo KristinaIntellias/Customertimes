@@ -15,7 +15,8 @@ export class AppComponent implements OnInit {
     this.demoExamplesGroup = this.fb.group({
       pipesDemo: this.fb.control(false),
       componentsDemo: this.fb.control(false),
-      servicesDemo: this.fb.control(true),
+      servicesDemo: this.fb.control(false),
+      routingDemo: this.fb.control(true),
     });
   }
 }

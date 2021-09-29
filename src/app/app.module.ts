@@ -1,3 +1,4 @@
+import { RoutingDemoModule } from './routing-demo/routing-demo.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -10,16 +11,19 @@ import { ServicesDemoModule } from './services-demo/services-demo.module';
 import { AppComponent } from './app.component';
 import { PipesDemoModule } from './pipes-demo/pipes-demo.module';
 import { ComponentsDemoModule } from './components-demo/components-demo.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    ComponentsDemoModule,
     ReactiveFormsModule,
     FormsModule,
+    NoopAnimationsModule,
+    ComponentsDemoModule,
     PipesDemoModule,
     ServicesDemoModule,
+    RoutingDemoModule,
   ],
   exports: [],
   providers: [],

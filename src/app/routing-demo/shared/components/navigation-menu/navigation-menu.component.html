@@ -1,0 +1,46 @@
+<!-- <button mat-button [matMenuTriggerFor]="aboveMenu">
+  <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+</button>
+<mat-menu #aboveMenu="matMenu" yPosition="above">
+  <button mat-menu-item [routerLink]="['/home']" routerLinkActive="active">
+    Home
+  </button>
+  <button mat-menu-item [routerLink]="['/about']">About</button>
+</mat-menu> -->
+
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label
+      ><a [routerLink]="['/home']">Home</a></ng-template
+    >
+    <h1>Home Page</h1>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label
+      ><a [routerLink]="['/about']">About</a></ng-template
+    >
+    <h1>About Page</h1>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label
+      ><a [routerLink]="['/users']">User List</a></ng-template
+    >
+    <h1>User Page</h1>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label
+      ><a [routerLink]="['/admin']">Admin Menu</a></ng-template
+    >
+    <h1>Admin Page</h1>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label
+      ><a [routerLink]="['/login']">Login</a></ng-template
+    >
+    <h1>Login Page</h1>
+  </mat-tab>
+</mat-tab-group>

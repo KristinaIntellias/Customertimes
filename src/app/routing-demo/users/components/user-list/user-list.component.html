@@ -1,0 +1,6 @@
+<app-user
+  *ngFor="let user of users$ | async"
+  [user]="user"
+  (onUserEdit)="onUserEdit($event)"
+>
+</app-user>

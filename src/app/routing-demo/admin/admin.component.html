@@ -1,0 +1,34 @@
+<h3>Admin</h3>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a [routerLink]="['./']" queryParamsHandling="preserve" preserveFragment
+        >Dashboard</a
+      >
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a
+        [routerLink]="['./users']"
+        queryParamsHandling="preserve"
+        preserveFragment
+        >Manage Users</a
+      >
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <a
+        [routerLink]="['./tasks']"
+        queryParamsHandling="preserve"
+        preserveFragment
+        >Manage Tasks</a
+      >
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<router-outlet></router-outlet>
