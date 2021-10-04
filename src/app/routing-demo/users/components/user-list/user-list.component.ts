@@ -3,14 +3,14 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 // rxjs
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators'
+import { switchMap } from 'rxjs/operators';
 
 import { UserModel } from '../../models/user.model';
 import { UserArrayService } from '../../services/user-array.service';
 
 @Component({
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
   users$: Observable<Array<UserModel>>;
@@ -20,7 +20,7 @@ export class UserListComponent implements OnInit {
     private userArrayService: UserArrayService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.users$ = this.userArrayService.getUsers();
@@ -30,17 +30,22 @@ export class UserListComponent implements OnInit {
         this.editedUser.lastEdited = new Date();
         this.userArrayService.updateUser(this.editedUser);
       },
-      error: (err) => console.log(err)
-    }
+      error: (err) => console.log(err),
+    };
 
-    this.activatedRoute.paramMap.pipe(
-      switchMap((params: ParamMap): Observable<UserModel> => this.userArrayService.getUser(+params.get('editedUserID'))
+    this.activatedRoute.paramMap
+      .pipe(
+        switchMap(
+          (params: ParamMap): Observable<UserModel> =>
+            this.userArrayService.getUser(+params.get('editedUserID'))
+        )
       )
-    ).subscribe(obs);
+      .subscribe(obs);
   }
 
   onUserEdit(user: UserModel) {
-    const link = ['edit', user.id];
-    this.router.navigate(link, { relativeTo: this.activatedRoute });
+    this.router.navigate(['edit', user.id], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }

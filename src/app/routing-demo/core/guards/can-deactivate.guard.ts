@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
 import { CanComponentDeactivate } from './../interfaces/can-component-deactivate.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CanDeactivateGuard
-  implements CanDeactivate<CanComponentDeactivate> {
+  implements CanDeactivate<CanComponentDeactivate>
+{
   canDeactivate(
     component: CanComponentDeactivate
   ):

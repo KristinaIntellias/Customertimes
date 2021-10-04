@@ -52,7 +52,6 @@ export class RoutingDemoComponent implements OnInit, OnDestroy {
   }
 
   onActivate(event: any, routerOutlet: RouterOutlet): void {
-    console.log(routerOutlet);
     this.titleService.setTitle(routerOutlet.activatedRouteData.title);
     this.metaService.addTags(routerOutlet.activatedRouteData.meta);
   }

@@ -57,13 +57,13 @@ const routes: Routes = [
     component: MessagesComponent,
     outlet: 'messages',
   },
-  {
-    path: 'admin',
-    canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./admin/admin.module').then((m) => m.AdminModule),
-    data: { title: 'Admin' },
-  },
+  // {
+  //   path: 'admin',
+  //   canLoad: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./admin/admin.module').then((m) => m.AdminModule),
+  //   data: { title: 'Admin' },
+  // },
   {
     path: 'users',
     loadChildren: () =>

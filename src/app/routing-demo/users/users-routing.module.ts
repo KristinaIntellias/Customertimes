@@ -17,10 +17,10 @@ const routes: Routes = [
       {
         path: 'edit/:userID',
         component: UserFormComponent,
-        canDeactivate: [CanDeactivateGuard],
-        resolve: {
-          user: UserResolveGuard,
-        },
+        // canDeactivate: [CanDeactivateGuard],
+        // resolve: {
+        //   user: UserResolveGuard,
+        // },
       },
       {
         path: '',

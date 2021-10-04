@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,7 @@ import { RoutingDemoComponent } from './routing-demo.component';
     CommonModule,
     SharedModule,
     SpinnerModule.forRoot(),
+    AdminModule,
     //MUST BE LAST
     AppRoutingModule,
   ],
