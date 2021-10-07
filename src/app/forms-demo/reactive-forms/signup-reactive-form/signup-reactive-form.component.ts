@@ -1,14 +1,21 @@
 import { debounceTime } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { CustomValidators } from './../../validators';
-import { UserModel } from 'src/app/models/user.model';
 import { Subscription } from 'rxjs';
+import { UserModel } from '../../models/user.model';
 @Component({
   selector: 'app-signup-reactive-form',
   templateUrl: './signup-reactive-form.component.html',
-  styleUrls: ['./signup-reactive-form.component.css']
+  styleUrls: ['./signup-reactive-form.component.css'],
 })
 export class SignupReactiveFormComponent implements OnInit, OnDestroy {
   private sub: Subscription;
@@ -18,8 +25,8 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
       pattern: 'Please enter a valid email address.',
       email: 'Please enter a valid email address.',
       asyncEmailInvalid:
-        'This email already exists. Please enter other email address.'
-    }
+        'This email already exists. Please enter other email address.',
+    },
   };
 
   validationMessage: string;
@@ -35,12 +42,12 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
   placeholder = {
     email: 'Email (required)',
     confirmEmail: 'Confirm Email (required)',
-    phone: 'Phone'
+    phone: 'Phone',
   };
   rMin = 1;
   rMax = 3;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   get addresses(): FormArray {
     return this.userForm.get('addresses') as FormArray;
@@ -92,28 +99,28 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
 
     if (notifyVia === 'text') {
       controls.get('phoneControl').setValidators(Validators.required);
-      controls.forEach(
-        (control, index) => {
-          if (index !== 'phoneControl') {
-            control.clearValidators();
-            control.clearAsyncValidators();
-          }
+      controls.forEach((control, index) => {
+        if (index !== 'phoneControl') {
+          control.clearValidators();
+          control.clearAsyncValidators();
         }
-      );
+      });
 
       this.placeholder = {
         phone: 'Phone (required)',
         email: 'Email',
-        confirmEmail: 'Confirm Email'
+        confirmEmail: 'Confirm Email',
       };
     } else {
       const emailControl = controls.get('emailControl');
       emailControl.setValidators([
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+'),
-        Validators.email
+        Validators.email,
       ]);
-      emailControl.setAsyncValidators(CustomValidators.asyncEmailPromiseValidator);
+      emailControl.setAsyncValidators(
+        CustomValidators.asyncEmailPromiseValidator
+      );
       controls.get('confirmEmailControl').setValidators([Validators.required]);
       controls.get('emailGroup').setValidators([CustomValidators.emailMatcher]);
       controls.get('phoneControl').clearValidators();
@@ -121,10 +128,11 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
       this.placeholder = {
         phone: 'Phone',
         email: 'Email (required)',
-        confirmEmail: 'Confirm Email (required)'
+        confirmEmail: 'Confirm Email (required)',
       };
     }
-    controls.forEach(control => control.updateValueAndValidity());
+
+    controls.forEach((control) => control.updateValueAndValidity());
   }
 
   private setFormValues() {
@@ -132,44 +140,51 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
-      sendProducts: this.user.sendProducts
+      sendProducts: this.user.sendProducts,
     });
   }
 
   private patchFormValues() {
     this.userForm.patchValue({
       firstName: this.user.firstName,
-      lastName: this.user.lastName
+      lastName: this.user.lastName,
     });
   }
 
   private buildForm() {
     this.userForm = this.fb.group({
-      firstName: this.fb.control('',
-        {
-          validators: [Validators.required, Validators.minLength(3)],
-          updateOn: 'blur'
-        }),
+      firstName: this.fb.control('', {
+        validators: [Validators.required, Validators.minLength(3)],
+        updateOn: 'blur',
+      }),
       lastName: [
         { value: 'Maksymiv', disabled: true },
         {
           validators: [Validators.required, Validators.maxLength(50)],
-        }
+        },
       ],
 
-      emailGroup: this.fb.group({
-        email: ['',
-          [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+'), Validators.email],
-          // [CustomValidators.asyncEmailPromiseValidator]
-        ],
-        confirmEmail: ['', Validators.required],
-      }, { validator: CustomValidators.emailMatcher }),
+      emailGroup: this.fb.group(
+        {
+          email: [
+            '',
+            [
+              Validators.required,
+              Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+'),
+              Validators.email,
+            ],
+            // [CustomValidators.asyncEmailPromiseValidator]
+          ],
+          confirmEmail: ['', Validators.required],
+        },
+        { validator: CustomValidators.emailMatcher }
+      ),
 
       phone: '',
       notification: 'email',
       serviceLevel: this.fb.control('', {
         validators: [],
-        updateOn: 'blur'
+        updateOn: 'blur',
       }),
       sendProducts: true,
       addresses: this.fb.array([this.buildAddress()]),
@@ -180,7 +195,7 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
     this.userForm = new FormGroup({
       firstName: new FormControl('', {
         validators: [Validators.required, Validators.minLength(3)],
-        updateOn: 'blur'
+        updateOn: 'blur',
       }),
       lastName: new FormControl(),
       email: new FormControl(),
@@ -188,24 +203,21 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
       notification: new FormControl('email'),
       serviceLevel: new FormControl('', {
         validators: [CustomValidators.serviceLevel],
-        updateOn: 'blur'
+        updateOn: 'blur',
       }),
-      sendProducts: new FormControl(true)
+      sendProducts: new FormControl(true),
     });
   }
 
   private watchValueChanges() {
-    this.sub = this.userForm.get('notification').valueChanges
-      .subscribe(value => this.setNotification(value));
+    this.sub = this.userForm
+      .get('notification')
+      .valueChanges.subscribe((value) => this.setNotification(value));
 
     const emailControl = this.userForm.get('emailGroup.email');
     const sub = emailControl.valueChanges
-      .pipe(
-        debounceTime(500),
-      )
-      .subscribe(value =>
-        this.setValidationMessage(emailControl, 'email')
-      );
+      .pipe(debounceTime(500))
+      .subscribe((value) => this.setValidationMessage(emailControl, 'email'));
 
     this.sub.add(sub);
   }
@@ -219,10 +231,8 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
 
     if ((c.touched || c.dirty) && c.errors) {
       this.validationMessage = Object.keys(c.errors)
-        .map(key => this.validationMessagesMap[controlName][key])
+        .map((key) => this.validationMessagesMap[controlName][key])
         .join(' ');
     }
   }
-
-
 }

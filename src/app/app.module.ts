@@ -1,11 +1,8 @@
+import { FormsDemoModule } from './forms-demo/forms-demo.module';
 import { RoutingDemoModule } from './routing-demo/routing-demo.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  NgModule,
-  NO_ERRORS_SCHEMA,
-  CUSTOM_ELEMENTS_SCHEMA,
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { ServicesDemoModule } from './services-demo/services-demo.module';
 import { AppComponent } from './app.component';
@@ -23,6 +20,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ComponentsDemoModule,
     PipesDemoModule,
     ServicesDemoModule,
+    FormsDemoModule,
     RoutingDemoModule,
   ],
   exports: [],

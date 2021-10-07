@@ -32,6 +32,11 @@
         />
         Show routing demo App
       </label>
+
+      <label>
+        <input name="formsDemo" type="checkbox" formControlName="formsDemo" />
+        Show forms demo App
+      </label>
     </form>
   </aside>
 
@@ -52,5 +57,9 @@
     <app-services-demo
       *ngIf="demoExamplesGroup.get('servicesDemo').value"
     ></app-services-demo>
+
+    <app-forms-demo
+      *ngIf="demoExamplesGroup.get('formsDemo').value"
+    ></app-forms-demo>
   </div>
 </main>

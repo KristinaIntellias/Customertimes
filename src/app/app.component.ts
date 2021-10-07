@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
       pipesDemo: this.fb.control(false),
       componentsDemo: this.fb.control(false),
       servicesDemo: this.fb.control(false),
-      routingDemo: this.fb.control(true),
+      routingDemo: this.fb.control(false),
+      formsDemo: this.fb.control(true),
     });
   }
 }
