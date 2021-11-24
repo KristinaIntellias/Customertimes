@@ -7,10 +7,7 @@
         <div
           class="form-group"
           [ngClass]="{
-            'has-error':
-              (userForm.get('firstName').touched ||
-                userForm.get('firstName').dirty) &&
-              !userForm.get('firstName').valid
+            'has-error': isControlHaveError('firstName')
           }"
         >
           <label class="col-md-2 control-label" for="firstNameId"
@@ -46,10 +43,7 @@
         <div
           class="form-group"
           [ngClass]="{
-            'has-error':
-              (userForm.get('lastName').touched ||
-                userForm.get('lastName').dirty) &&
-              !userForm.get('lastName').valid
+            'has-error': isControlHaveError('lastName')
           }"
         >
           <label class="col-md-2 control-label" for="lastNameId"
@@ -96,8 +90,7 @@
                 type="email"
                 placeholder="{{ placeholder.email }}"
                 formControlName="email"
-                appAsyncEmailValidator
-                (blur)="onBlur()"
+                (blur)="onEmailBlur()"
               />
               <span class="help-block" *ngIf="validationMessage">
                 {{ validationMessage }}
@@ -108,10 +101,7 @@
           <div
             class="form-group"
             [ngClass]="{
-              'has-error':
-                (userForm.get('emailGroup.confirmEmail').touched ||
-                  userForm.get('emailGroup.confirmEmail').dirty) &&
-                userForm.get('emailGroup.confirmEmail').invalid
+              'has-error': isControlHaveError('emailGroup.confirmEmail')
             }"
           >
             <label class="col-md-2 control-label" for="confirmEmailId"
@@ -205,10 +195,7 @@
         <div
           class="form-group"
           [ngClass]="{
-            'has-error':
-              (userForm.get('serviceLevel').touched ||
-                userForm.get('serviceLevel').dirty) &&
-              !userForm.get('serviceLevel').valid
+            'has-error': isControlHaveError('serviceLevel')
           }"
         >
           <label class="col-md-2 control-label" for="serviceLevelId"

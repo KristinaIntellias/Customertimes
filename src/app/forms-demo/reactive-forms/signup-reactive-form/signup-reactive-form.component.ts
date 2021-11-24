@@ -55,14 +55,14 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.createForm();
-    // this.setFormValues();
-    // this.patchFormValues()
     this.buildForm();
+    // this.patchFormValues();
+    // this.setFormValues();
     this.watchValueChanges();
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.sub?.unsubscribe();
   }
 
   onSave() {
@@ -74,7 +74,7 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
     console.log(`Saved: ${JSON.stringify(this.userForm.getRawValue())}`);
   }
 
-  onBlur() {
+  onEmailBlur() {
     const emailControl = this.userForm.get('emailGroup.email');
     this.setValidationMessage(emailControl, 'email');
   }
@@ -135,20 +135,9 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
     controls.forEach((control) => control.updateValueAndValidity());
   }
 
-  private setFormValues() {
-    this.userForm.setValue({
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      email: this.user.email,
-      sendProducts: this.user.sendProducts,
-    });
-  }
-
-  private patchFormValues() {
-    this.userForm.patchValue({
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-    });
+  isControlHaveError(controlName: string): boolean {
+    const c = this.userForm.get(controlName);
+    return (c.touched || c.dirty) && !c.valid;
   }
 
   private buildForm() {
@@ -186,8 +175,8 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
         validators: [],
         updateOn: 'blur',
       }),
-      sendProducts: true,
       addresses: this.fb.array([this.buildAddress()]),
+      sendProducts: true,
     });
   }
 
@@ -201,11 +190,16 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
       email: new FormControl(),
       phone: new FormControl(),
       notification: new FormControl('email'),
-      serviceLevel: new FormControl('', {
-        validators: [CustomValidators.serviceLevel],
-        updateOn: 'blur',
-      }),
+      serviceLevel: new FormControl(
+        '',
+        {
+          validators: [CustomValidators.serviceLevel],
+          updateOn: 'blur',
+        },
+        CustomValidators.asyncEmailPromiseValidator
+      ),
       sendProducts: new FormControl(true),
+      addresses: new FormArray([]),
     });
   }
 
@@ -234,5 +228,20 @@ export class SignupReactiveFormComponent implements OnInit, OnDestroy {
         .map((key) => this.validationMessagesMap[controlName][key])
         .join(' ');
     }
+  }
+
+  private setFormValues() {
+    this.userForm.setValue({
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      sendProducts: this.user.sendProducts,
+    });
+  }
+
+  private patchFormValues() {
+    this.userForm.patchValue({
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+    });
   }
 }

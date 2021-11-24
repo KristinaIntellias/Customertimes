@@ -11,7 +11,7 @@ export function checkServiceLevel(
     (Number.isNaN(c.value) || c.value < min || c.value > max)
   ) {
     return {
-      serviceLevel: true
+      serviceLevel: true,
     };
   }
   return null;
@@ -25,20 +25,19 @@ export class CustomValidators {
   static serviceLevelRange(min: number, max: number): ValidatorFn {
     return (c: AbstractControl): ValidationErrors | null => {
       return checkServiceLevel(c, min, max);
-    }
+    };
   }
 
   static asyncEmailPromiseValidator(
     c: AbstractControl
-  ):
-    | Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+  ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     const email = c.value;
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         if (email === 'existsemail@example.com') {
           resolve({
-            asyncEmailInvalid: true
+            asyncEmailInvalid: true,
           });
         } else {
           resolve(null);

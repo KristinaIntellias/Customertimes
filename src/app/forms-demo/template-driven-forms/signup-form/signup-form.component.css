@@ -1,3 +1,16 @@
-input.ng-valid.ng-touched{
-  background: lightgreen;
+input.ng-valid {
+  border-color: lightgreen;
+}
+
+input.ng-touched {
+  border-color: blue;
+}
+
+input.ng-invalid {
+  border-color: red;
+}
+
+
+input.ng-pristine {
+  border-color: purple;
 }

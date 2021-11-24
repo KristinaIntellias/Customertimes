@@ -23,11 +23,4 @@ import { RoutingDemoComponent } from './routing-demo.component';
   bootstrap: [],
   exports: [RoutingDemoComponent],
 })
-export class RoutingDemoModule {
-  constructor(router: Router) {
-    const replacer = (key: string, value: any): string =>
-      typeof value === 'function' ? value.name : value;
-
-    console.log('Routes: ', JSON.stringify(router.config, replacer, 2));
-  }
-}
+export class RoutingDemoModule {}

@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.demoExamplesGroup = this.fb.group({
-      pipesDemo: this.fb.control(false),
-      componentsDemo: this.fb.control(false),
-      servicesDemo: this.fb.control(false),
-      routingDemo: this.fb.control(false),
-      formsDemo: this.fb.control(true),
+      pipesDemo: false,
+      componentsDemo: true,
+      servicesDemo: false,
+      routingDemo: false,
+      formsDemo: false,
     });
   }
 }

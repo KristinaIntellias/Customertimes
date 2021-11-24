@@ -24,10 +24,18 @@ export class RoutingDemoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('MODULES:');
-    console.log(this.preloadStrategy.preloadedModules);
+    // console.log('MODULES:');
+    // console.log(this.preloadStrategy.preloadedModules);
 
     this.setPageTitle();
+    this.showRouterTree();
+  }
+
+  showRouterTree() {
+    const replacer = (key: string, value: any): string =>
+      typeof value === 'function' ? value.name : value;
+
+    console.log('Routes: ', JSON.stringify(this.router.config, replacer, 2));
   }
 
   ngOnDestroy(): void {
